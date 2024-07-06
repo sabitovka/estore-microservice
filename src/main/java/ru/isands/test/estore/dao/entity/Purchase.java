@@ -4,25 +4,19 @@ package ru.isands.test.estore.dao.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.TableGenerator;
+import javax.persistence.*;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "store_purchase")
 public class Purchase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Идентификатор покупки
 	 */
@@ -31,35 +25,38 @@ public class Purchase implements Serializable {
 	@TableGenerator(name = "purchase_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.dao.entity.Purchase", table = "counter", valueColumnName = "currentid", allocationSize = 1)
 	@Column(name = "id_", unique = true, nullable = false)
 	Long id;
-	
+
 	/**
-	 * Идентификатор товара
+	 * Товар
 	 */
-	@Column(name = "electroId", nullable = false)
-	Long electroId;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "electroId", nullable = false)
+	ElectroItem electro;
+
 	/**
-	 * Идентификатор сотрудника
+	 * Сотрудник
 	 */
-	@Column(name = "employeeId", nullable = false)
-	Long employeeId;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "employeeId", nullable = false)
+	Employee employee;
+
 	/**
-	 * Идентификатор магазина
+	 * Магазин
 	 */
-	@Column(name = "shopId", nullable = false)
-	Long shopId;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "shopId", nullable = false)
+	Shop shop;
+
 	/**
 	 * Дата совершения покупки
 	 */
 	@Column(name = "purchaseDate", nullable = false)
 	Date purchaseDate;
-	
+
 	/**
 	 * Способ оплаты
 	 */
-	@Column(name = "type", nullable = false)
-	int type;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "typeId", nullable = false)
+	PurchaseType type;
 }

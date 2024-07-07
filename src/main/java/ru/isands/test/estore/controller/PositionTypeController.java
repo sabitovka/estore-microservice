@@ -7,15 +7,16 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.isands.test.estore.dto.PositionTypeDTO;
 import ru.isands.test.estore.service.PositionTypeService;
-import ru.isands.test.estore.util.PageSettings;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/position-types")
 @Tag(name = "PositionType", description = "Сервис для выполнения операций над типами должностей")
@@ -43,8 +44,14 @@ public class PositionTypeController {
             @ApiResponse(description = "Список типов должностей", responseCode = "200",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = PositionTypeDTO.class))))
     })
-    public ResponseEntity<List<PositionTypeDTO>> getAllPositionTypes(@RequestParam(required = false) PageSettings pageSettings) {
-        List<PositionTypeDTO> positionTypes = positionTypeService.getAllPositionTypes(pageSettings);
+    public ResponseEntity<List<PositionTypeDTO>> getAllPositionTypes(
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "10") int size,
+            @RequestParam(required = false) String sortField,
+            @RequestParam(required = false, defaultValue = "asc") String sortType
+    ) {
+        log.info("[PositionType] Запрос всех должностей c пагинацией - page: {}, size: {}, sortField: {}, sortType: {}", page, size, sortField, sortType);
+        List<PositionTypeDTO> positionTypes = positionTypeService.getAllPositionTypes(page, size, sortType, sortField);
         return ResponseEntity.ok(positionTypes);
     }
 

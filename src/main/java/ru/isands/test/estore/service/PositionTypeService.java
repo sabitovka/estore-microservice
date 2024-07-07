@@ -4,15 +4,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.isands.test.estore.dto.PositionTypeDTO;
-import ru.isands.test.estore.dto.ShopDTO;
 import ru.isands.test.estore.exception.EntityNotFoundException;
 import ru.isands.test.estore.model.PositionType;
-import ru.isands.test.estore.model.Shop;
 import ru.isands.test.estore.repository.PositionTypeRepository;
-import ru.isands.test.estore.util.PageSettings;
+import ru.isands.test.estore.util.PagingUtil;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,12 +34,9 @@ public class PositionTypeService {
         return modelMapper.map(positionType, PositionTypeDTO.class);
     }
 
-    public List<PositionTypeDTO> getAllPositionTypes(PageSettings pageSettings) {
-        List<PositionType> positionTypes = Optional.ofNullable(pageSettings)
-                .map(settings -> positionTypeRepository.findAll(pageSettings.createPageRequest()).getContent())
-                .orElseGet(positionTypeRepository::findAll);
-
-        return positionTypes.stream()
+    public List<PositionTypeDTO> getAllPositionTypes(int page, int elemsPerPage, String sortField, String sortType) {
+        return positionTypeRepository.findAll(
+                PagingUtil.createPageRequest(page, elemsPerPage, sortField, sortType, PositionType.class)).getContent().stream()
                 .map(positionType -> modelMapper.map(positionType, PositionTypeDTO.class))
                 .collect(Collectors.toList());
     }

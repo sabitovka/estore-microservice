@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import ru.isands.test.estore.dto.EmployeeDTO;
 import ru.isands.test.estore.exception.ErrorResponse;
 import ru.isands.test.estore.model.Employee;
-import ru.isands.test.estore.util.PageSettings;
+import ru.isands.test.estore.util.PagingUtil;
 import ru.isands.test.estore.service.EmployeeService;
 
 import java.util.List;
@@ -40,14 +40,14 @@ public class EmployeeController {
 	@Operation(summary = "Получить всех сотрудников", responses = {
 			@ApiResponse(responseCode = "200", description = "Список сотрудников")
 	})
-	public ResponseEntity<List<EmployeeDTO>> getEmployees(PageSettings pageSettings) {
-		log.info("Запрошены все сотрудники с pageSettings: " + pageSettings.toString());
-		List<Employee> employees = employeeService.getEmployeeList(pageSettings);
-		return ResponseEntity.ok(
-				employees.stream()
-						.map(employee -> modelMapper.map(employee, EmployeeDTO.class))
-						.collect(Collectors.toList())
-			);
+	public ResponseEntity<List<EmployeeDTO>> getEmployees(
+			@RequestParam(required = false, defaultValue = "0") int page,
+			@RequestParam(required = false, defaultValue = "10") int size,
+			@RequestParam(required = false) String sortField,
+			@RequestParam(required = false, defaultValue = "asc") String sortType
+	) {
+		log.info("[Shop] Запрос всех магазинов c пагинацией - page: {}, size: {}, sortField: {}, sortType: {}", page, size, sortField, sortType);
+		return ResponseEntity.ok(employeeService.getAllEmployees(page, size, sortField, sortType));
 	}
 
 	@PostMapping

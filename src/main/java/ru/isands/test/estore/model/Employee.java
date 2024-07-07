@@ -1,4 +1,4 @@
-package ru.isands.test.estore.dao.entity;
+package ru.isands.test.estore.model;
 
 
 import java.io.Serializable;
@@ -8,8 +8,6 @@ import java.util.Set;
 import javax.persistence.*;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 @Entity
@@ -23,7 +21,7 @@ public class Employee implements Serializable {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "employee_counter")
-	@TableGenerator(name = "employee_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.dao.entity.Employee", table = "counter", valueColumnName = "currentid", allocationSize = 2)
+	@TableGenerator(name = "employee_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.models.Employee", table = "counter", valueColumnName = "currentid", allocationSize = 2)
 	@Column(name = "id_", unique = true, nullable = false)
 	Long id;
 

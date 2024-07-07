@@ -1,13 +1,8 @@
-package ru.isands.test.estore.dao.entity;
+package ru.isands.test.estore.model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -17,6 +12,8 @@ public class Shop {
      * Идентификатор магазина
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "shop_counter")
+    @TableGenerator(name = "shop_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.model.Shop", table = "counter", valueColumnName = "currentid", allocationSize = 2)
     @Column(name = "id", nullable = false)
     Long id;
 

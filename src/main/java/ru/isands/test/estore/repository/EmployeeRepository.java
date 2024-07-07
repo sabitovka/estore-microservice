@@ -1,8 +1,8 @@
-package ru.isands.test.estore.dao.repository;
+package ru.isands.test.estore.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import ru.isands.test.estore.dao.entity.Employee;
+import ru.isands.test.estore.model.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 }

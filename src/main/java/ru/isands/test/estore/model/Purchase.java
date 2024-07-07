@@ -1,4 +1,4 @@
-package ru.isands.test.estore.dao.entity;
+package ru.isands.test.estore.model;
 
 
 import java.io.Serializable;
@@ -7,8 +7,6 @@ import java.util.Date;
 import javax.persistence.*;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 @Entity
@@ -22,7 +20,7 @@ public class Purchase implements Serializable {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "purchase_counter")
-	@TableGenerator(name = "purchase_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.dao.entity.Purchase", table = "counter", valueColumnName = "currentid", allocationSize = 1)
+	@TableGenerator(name = "purchase_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.models.Purchase", table = "counter", valueColumnName = "currentid", allocationSize = 1)
 	@Column(name = "id_", unique = true, nullable = false)
 	Long id;
 

@@ -1,14 +1,8 @@
-package ru.isands.test.estore.dao.entity;
+package ru.isands.test.estore.model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -19,6 +13,8 @@ public class PositionType {
      * Идентификатор типа должности
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "position_counter")
+    @TableGenerator(name = "position_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.model.PositionType", table = "counter", valueColumnName = "currentid", allocationSize = 2)
     @Column(name = "id", nullable = false)
     Long id;
 

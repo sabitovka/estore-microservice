@@ -1,8 +1,6 @@
-package ru.isands.test.estore.dao.entity;
+package ru.isands.test.estore.model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

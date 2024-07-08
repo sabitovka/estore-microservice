@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.isands.test.estore.model.PurchaseType;
 
 @Repository
-public interface PurchaseRepository extends JpaRepository<PurchaseType, Long> {
+public interface PurchaseTypeRepository extends JpaRepository<PurchaseType, Long> {
 }

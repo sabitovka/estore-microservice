@@ -2,10 +2,7 @@ package ru.isands.test.estore.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -16,6 +13,8 @@ public class PurchaseType {
      * Идентификатор типа покупки
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "purchase_type_counter")
+    @TableGenerator(name = "purchase_type_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.model.PurchaseType", table = "counter", valueColumnName = "currentid", allocationSize = 2)
     @Column(name = "id", nullable = false)
     Long id;
 

@@ -3,10 +3,12 @@ package ru.isands.test.estore.exception;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,5 +46,15 @@ public class RestExceptionHandler {
         exception.printStackTrace();
         ErrorResponse response = new ErrorResponse("Произошла внутрення ошибка сервера", List.of(exception.getMessage()));
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException exception) {
+        List<String> errors = new ArrayList<>();
+        exception.getAllErrors().forEach(err -> errors.add(err.getDefaultMessage()));
+        log.error("Произошла ошибка валидации модели {}", errors);
+        ErrorResponse errorResponse = new ErrorResponse("Проверьте правильность заполнения полей", errors);
+        return ResponseEntity.badRequest().body(errorResponse);
     }
 }

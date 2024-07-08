@@ -26,14 +26,11 @@ import java.util.stream.Collectors;
 @Tag(name = "Employee", description = "Сервис для выполнения операций над сотрудниками магазина")
 @RequestMapping("/estore/api/employee")
 public class EmployeeController {
-
 	private final EmployeeService employeeService;
-	private final ModelMapper modelMapper;
 
 	@Autowired
 	public EmployeeController(EmployeeService employeeService, ModelMapper modelMapper) {
 		this.employeeService = employeeService;
-		this.modelMapper = modelMapper;
 	}
 
 	@GetMapping
@@ -60,10 +57,9 @@ public class EmployeeController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
 			})
 	})
-	public EmployeeDTO createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+	public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
 		log.info("Принят запрос на создание нового сотрудника: " + employeeDTO.toString());
-		Employee employee = modelMapper.map(employeeDTO, Employee.class);
-		Employee employeeCreated = employeeService.createEmployee(employee);
-		return modelMapper.map(employeeCreated, EmployeeDTO.class);
+		EmployeeDTO createdEmployee = employeeService.createEmployee(employeeDTO);
+		return ResponseEntity.ok(createdEmployee);
 	}
 }

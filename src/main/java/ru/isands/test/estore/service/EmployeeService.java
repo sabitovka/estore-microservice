@@ -29,20 +29,25 @@ public class EmployeeService {
         this.modelMapper = modelMapper;
     }
 
-    public Employee createEmployee(Employee employee) {
+    public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
         List<String> validationErrors = new ArrayList<>();
 
-        boolean positionTypeExists = positionTypeService.isPositionTypeExists(employee.getPositionType().getId());
-        if (!positionTypeExists) validationErrors.add("Не найдена должность с id=" + employee.getPositionType().getId());
+        boolean positionTypeExists = positionTypeService.isPositionTypeExists(employeeDTO.getPositionTypeId());
+        if (!positionTypeExists) {
+            validationErrors.add("Не найдена должность с id=" + employeeDTO.getPositionTypeId());
+        }
 
-        boolean shopExists = shopService.isShopExists(employee.getShop().getId());
-        if (!shopExists) validationErrors.add("Не найден магазин с id="+employee.getShop().getId());
+        boolean shopExists = shopService.isShopExists(employeeDTO.getShopId());
+        if (!shopExists) {
+            validationErrors.add("Не найден магазин с id=" + employeeDTO.getShopId());
+        }
 
         if (validationErrors.size() > 0) {
             throw new EntityNotValidException("Не удалось создать нового сотрудника", validationErrors);
         }
 
-        return employeeRepository.save(employee);
+        Employee saved = employeeRepository.save(modelMapper.map(employeeDTO, Employee.class));
+        return modelMapper.map(saved, EmployeeDTO.class);
     }
 
     public List<EmployeeDTO> getAllEmployees(int page, int size, String sortField, String sortType) {

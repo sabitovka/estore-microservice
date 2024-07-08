@@ -47,6 +47,7 @@ public class Employee implements Serializable {
 	 * Дата рождения сотрудника
 	 */
 	@Column(name = "birthDate", nullable = false)
+	@Temporal(TemporalType.DATE)
 	Date birthDate;
 
 	/**

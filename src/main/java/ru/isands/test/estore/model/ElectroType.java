@@ -13,6 +13,8 @@ public class ElectroType {
      * Идентификатор типа электроники
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "electro_type_generator")
+    @TableGenerator(name = "electro_type_generator", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.model.ElectroType", table = "counter", valueColumnName = "currentid", allocationSize = 2)
     @Column(name = "id", nullable = false)
     Long id;
 

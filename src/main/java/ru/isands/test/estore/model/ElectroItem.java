@@ -26,7 +26,7 @@ public class ElectroItem {
     String name;
 
     /**
-     * Стоимость товара (P.S. почему Long, а не double?)
+     * Стоимость товара (P.S. почему на схеме Long, а не double?)
      */
     @Column(name = "price", nullable = false)
     Long price;

@@ -4,11 +4,9 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 @Data
 public class ElectroTypeDTO {
-    @Null
     private Long id;
 
     @NotBlank(message = "Поле name не должно быть пустым")

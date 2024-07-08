@@ -1,6 +1,7 @@
 package ru.isands.test.estore.model;
 
 import lombok.Data;
+import org.apache.commons.lang3.builder.HashCodeExclude;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -23,12 +24,4 @@ public class ElectroType {
      */
     @Column(name = "name", nullable = false, length = 150)
     String name;
-
-    @ManyToMany
-    @JoinTable(
-            name = "store_electro_employee",
-            joinColumns = @JoinColumn(name = "electroTypeId"),
-            inverseJoinColumns = @JoinColumn(name = "employeeId")
-    )
-    Set<Employee> employees;
 }

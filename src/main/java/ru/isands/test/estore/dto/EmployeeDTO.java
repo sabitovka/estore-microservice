@@ -11,7 +11,6 @@ import java.util.Date;
 
 @Data
 public class EmployeeDTO {
-    @Null
     private Long id;
 
     @NotBlank(message = "Поле lastName не должно быть пустым")
@@ -30,15 +29,12 @@ public class EmployeeDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date birthDate;
 
-    @NotBlank(message = "Поле name не должно быть пустым")
-    @NotNull(message = "Поле name не должно отсутствовать")
+    @NotNull(message = "Поле gender не должно отсутствовать")
     private boolean gender;
 
-    @NotBlank(message = "Поле name не должно быть пустым")
-    @NotNull(message = "Поле name не должно отсутствовать")
+    @NotNull(message = "Поле positionTypeId не должно отсутствовать")
     private Long positionTypeId;
 
-    @NotBlank(message = "Поле name не должно быть пустым")
-    @NotNull(message = "Поле name не должно отсутствовать")
+    @NotNull(message = "Поле shopId не должно отсутствовать")
     private Long shopId;
 }

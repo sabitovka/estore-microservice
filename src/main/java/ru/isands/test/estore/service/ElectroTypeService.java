@@ -23,6 +23,11 @@ public class ElectroTypeService {
         this.modelMapper = modelMapper;
     }
 
+    public ElectroType findElectroTypeByIdThrowable(Long id, String message) {
+        return electroTypeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(message, List.of("Не удалось найти тип электроники c id=" + id)));
+    }
+
     public List<ElectroTypeDTO> getAllElectroTypes(int page, int size, String sortField, String sortType) {
         return electroTypeRepository.findAll(
                         PagingUtil.createPageRequest(page, size, sortField, sortType, ElectroType.class)
@@ -32,8 +37,7 @@ public class ElectroTypeService {
     }
 
     public ElectroTypeDTO getElectroTypeById(Long id) {
-        ElectroType electroType = electroTypeRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Тип электроники не найден", List.of("Не удалось найти тип электроники c id=" + id)));
+        ElectroType electroType = findElectroTypeByIdThrowable(id, "Тип электроники не найден");
         return modelMapper.map(electroType, ElectroTypeDTO.class);
     }
 
@@ -44,8 +48,7 @@ public class ElectroTypeService {
     }
 
     public ElectroTypeDTO updateElectroType(Long id, ElectroTypeDTO electroTypeDTO) {
-        ElectroType existingElectroType = electroTypeRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Не удалось обновить тип электроники", List.of("Не удалось найти тип электроники c id=" + id)));
+        ElectroType existingElectroType = findElectroTypeByIdThrowable(id, "Тип электроники не найден");
         modelMapper.map(electroTypeDTO, existingElectroType);
         ElectroType updatedElectroType = electroTypeRepository.save(existingElectroType);
         return modelMapper.map(updatedElectroType, ElectroTypeDTO.class);

@@ -51,7 +51,7 @@ public class PositionTypeController {
             @RequestParam(required = false, defaultValue = "asc") String sortType
     ) {
         log.info("[PositionType] Запрос всех должностей c пагинацией - page: {}, size: {}, sortField: {}, sortType: {}", page, size, sortField, sortType);
-        List<PositionTypeDTO> positionTypes = positionTypeService.getAllPositionTypes(page, size, sortType, sortField);
+        List<PositionTypeDTO> positionTypes = positionTypeService.getAllPositionTypes(page, size, sortField, sortType);
         return ResponseEntity.ok(positionTypes);
     }
 
@@ -61,9 +61,7 @@ public class PositionTypeController {
             content = @Content(schema = @Schema(implementation = PositionTypeDTO.class))),
         @ApiResponse(description = "Неверный запрос", responseCode = "400")
     })
-    public ResponseEntity<PositionTypeDTO> createPositionType(
-            @Parameter(description = "Данные нового типа должности", required = true)
-            @RequestBody PositionTypeDTO positionTypeDTO) {
+    public ResponseEntity<PositionTypeDTO> createPositionType(@RequestBody PositionTypeDTO positionTypeDTO) {
         PositionTypeDTO createdPositionType = positionTypeService.createPositionType(positionTypeDTO);
         return ResponseEntity.status(201).body(createdPositionType);
     }

@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.isands.test.estore.dto.ElectroTypeDTO;
 import ru.isands.test.estore.service.ElectroTypeService;
@@ -50,7 +51,7 @@ public class ElectroTypeController {
     @PostMapping
     @Operation(summary = "Создать новый тип электроники")
     @ApiResponse(responseCode = "201", description = "Тип электроники создан", content = @Content(schema = @Schema(implementation = ElectroTypeDTO.class)))
-    public ResponseEntity<ElectroTypeDTO> createElectroType(@Valid @RequestBody ElectroTypeDTO electroTypeDTO) {
+    public ResponseEntity<ElectroTypeDTO> createElectroType(@Validated @RequestBody ElectroTypeDTO electroTypeDTO) {
         ElectroTypeDTO createdElectroType = electroTypeService.createElectroType(electroTypeDTO);
         return ResponseEntity.status(201).body(createdElectroType);
     }
@@ -59,7 +60,7 @@ public class ElectroTypeController {
     @Operation(summary = "Обновить тип электроники")
     @ApiResponse(responseCode = "200", description = "Тип электроники обновлен", content = @Content(schema = @Schema(implementation = ElectroTypeDTO.class)))
     @ApiResponse(responseCode = "404", description = "Тип электроники не найден")
-    public ResponseEntity<ElectroTypeDTO> updateElectroType(@PathVariable Long id, @Valid @RequestBody ElectroTypeDTO electroTypeDTO) {
+    public ResponseEntity<ElectroTypeDTO> updateElectroType(@PathVariable Long id, @Validated @RequestBody ElectroTypeDTO electroTypeDTO) {
         ElectroTypeDTO updatedElectroType = electroTypeService.updateElectroType(id, electroTypeDTO);
         return ResponseEntity.ok(updatedElectroType);
     }

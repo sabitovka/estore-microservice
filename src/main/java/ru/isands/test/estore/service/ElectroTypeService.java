@@ -23,6 +23,10 @@ public class ElectroTypeService {
         this.modelMapper = modelMapper;
     }
 
+    public boolean isElectroTypeExists(Long id) {
+        return electroTypeRepository.existsById(id);
+    }
+
     public ElectroType findElectroTypeByIdThrowable(Long id, String message) {
         return electroTypeRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(message, List.of("Не удалось найти тип электроники c id=" + id)));

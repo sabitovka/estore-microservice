@@ -2,6 +2,7 @@ package ru.isands.test.estore.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 
@@ -32,10 +33,10 @@ public class ElectroItem {
     Long price;
 
     /**
-     * Общее кол-во
+     * Общий остаток товара
      */
-    @Column(name = "count", nullable = false)
-    int count;
+    @Transient
+    int totalCount;
 
     /**
      * Архив - товар недоступен
@@ -52,4 +53,9 @@ public class ElectroItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "etypeId")
     ElectroType electroType;
+
+    @Formula("(SELECT SUM(e.count_) FROM store_eshop e WHERE e.electroItemId = id_)")
+    public int getTotalCount() {
+        return totalCount;
+    }
 }

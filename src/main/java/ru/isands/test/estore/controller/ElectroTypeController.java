@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.isands.test.estore.dto.ElectroTypeDTO;
 import ru.isands.test.estore.service.ElectroTypeService;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController

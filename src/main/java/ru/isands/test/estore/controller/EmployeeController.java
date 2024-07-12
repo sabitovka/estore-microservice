@@ -1,19 +1,16 @@
 package ru.isands.test.estore.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import ru.isands.test.estore.dto.ElectroTypeDTO;
 import ru.isands.test.estore.dto.EmployeeDTO;
 import ru.isands.test.estore.dto.SimpleIdDTO;
-import ru.isands.test.estore.model.Employee;
 import ru.isands.test.estore.service.EmployeeService;
 
 import javax.validation.Valid;
@@ -23,7 +20,7 @@ import java.util.Set;
 @Slf4j
 @RestController
 @Tag(name = "Employee", description = "Сервис для выполнения операций над сотрудниками магазина")
-@RequestMapping("/estore/api/employee")
+@RequestMapping("/estore/api/employees")
 public class EmployeeController {
 	private final EmployeeService employeeService;
 

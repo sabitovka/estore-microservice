@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.isands.test.estore.dto.AddElectroItemDTO;
+import ru.isands.test.estore.dto.ElectroShopDTO;
 import ru.isands.test.estore.dto.ShopDTO;
 import ru.isands.test.estore.exception.ErrorResponse;
 import ru.isands.test.estore.service.ShopService;
@@ -93,5 +95,17 @@ public class ShopController {
         log.info("[Shop] Запрос на удаление с id={}.", id);
         shopService.deleteShop(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{shopId}/electro-items")
+    public ResponseEntity<Void> addElectroItemsToShop(@PathVariable Long shopId, @RequestBody List<AddElectroItemDTO> electroItems) {
+        shopService.addElectroItemsToShop(shopId, electroItems);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{shopId}/electro-items")
+    public ResponseEntity<List<ElectroShopDTO>> findAllShopElectroItems(@PathVariable Long shopId) {
+        List<ElectroShopDTO> electroShopDTOS = shopService.findAllShopElectroItems(shopId);
+        return ResponseEntity.ok(electroShopDTOS);
     }
 }

@@ -35,7 +35,7 @@ public class ElectroItem {
     /**
      * Общий остаток товара
      */
-    @Transient
+    @Formula("(SELECT SUM(e.count_) FROM store_eshop e WHERE e.electroitemid = id_)")
     int totalCount;
 
     /**
@@ -53,9 +53,4 @@ public class ElectroItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "etypeId")
     ElectroType electroType;
-
-    @Formula("(SELECT SUM(e.count_) FROM store_eshop e WHERE e.electroItemId = id_)")
-    public int getTotalCount() {
-        return totalCount;
-    }
 }

@@ -40,6 +40,10 @@ public class ElectroItemService {
         }
     }
 
+    public boolean isElectroItemExists(Long id) {
+        return electroItemRepository.existsById(id);
+    }
+
     public ElectroItem findElectroItemByIdThrowable(Long id, String message) {
         return electroItemRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(message, List.of("Не удалось найти товар с id = " + id)));

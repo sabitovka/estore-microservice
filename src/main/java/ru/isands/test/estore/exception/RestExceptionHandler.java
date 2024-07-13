@@ -57,4 +57,10 @@ public class RestExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse("Проверьте правильность заполнения полей", errors);
         return ResponseEntity.badRequest().body(errorResponse);
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<ErrorResponse> handleElectroItemOutOfStockException(ElectroItemOutOfStockException exception) {
+        return createErrorResponse(exception, HttpStatus.NO_CONTENT);
+    }
 }

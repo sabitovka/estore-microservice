@@ -98,12 +98,14 @@ public class ShopController {
     }
 
     @PostMapping("/{shopId}/electro-items")
+    @Operation(summary = "Добавить список товаров в магазин", description = "Товары будут добавлены к существующим в этом магазине")
     public ResponseEntity<Void> addElectroItemsToShop(@PathVariable Long shopId, @RequestBody List<AddElectroItemDTO> electroItems) {
         shopService.addElectroItemsToShop(shopId, electroItems);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{shopId}/electro-items")
+    @Operation(summary = "Получить все товары в магазине")
     public ResponseEntity<List<ElectroShopDTO>> findAllShopElectroItems(@PathVariable Long shopId) {
         List<ElectroShopDTO> electroShopDTOS = shopService.findAllShopElectroItems(shopId);
         return ResponseEntity.ok(electroShopDTOS);

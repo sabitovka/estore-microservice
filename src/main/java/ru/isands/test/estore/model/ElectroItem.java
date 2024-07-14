@@ -35,7 +35,7 @@ public class ElectroItem {
     /**
      * Общий остаток товара
      */
-    @Formula("(SELECT SUM(e.count_) FROM store_eshop e WHERE e.electroitemid = id_)")
+    @Formula("(SELECT COALESCE(SUM(e.count_), 0) FROM store_eshop e WHERE e.electroitemid = id_)")
     int totalCount;
 
     /**

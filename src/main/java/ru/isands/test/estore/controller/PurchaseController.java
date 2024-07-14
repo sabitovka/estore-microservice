@@ -1,5 +1,6 @@
 package ru.isands.test.estore.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +35,14 @@ public class PurchaseController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Получить покупку по ее ID")
     public ResponseEntity<PurchaseDetailsDTO> findById(@PathVariable Long id) {
         PurchaseDetailsDTO purchase = purchaseService.findById(id);
         return ResponseEntity.ok(purchase);
     }
 
     @PostMapping
+    @Operation(summary = "Создать новую покупку", description = "Новая покупка создается с датой выполнения запроса")
     public ResponseEntity<PurchaseDetailsDTO> createPurchase(@RequestBody PurchaseCreateDTO purchase) {
         PurchaseDetailsDTO detailedPurchase = purchaseService.createPurchase(purchase);
         return ResponseEntity.ok(detailedPurchase);

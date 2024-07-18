@@ -58,7 +58,7 @@ async function getBestJuniorSaler() {
         return;
     }
     const block = document.getElementById('bestJuniorSoldSmartWatches');
-    block.textContent = `- Лучший ${data.positionName}, продавший больше всех ${itemName}: ${data.firstName} ${data.lastName} (#${data.id}) - ${data.itemsSold} шт.`
+    block.textContent = `- Лучший ${data.positionName}, продавший больше всех ${data.itemName}: ${data.firstName} ${data.lastName} (#${data.id}) - ${data.itemsSold} шт.`
 }
 
 async function getBestEmployeesByTypeSales() {

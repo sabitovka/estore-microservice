@@ -59,8 +59,8 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponse> handleElectroItemOutOfStockException(ElectroItemOutOfStockException exception) {
-        return createErrorResponse(exception, HttpStatus.NO_CONTENT);
+        return createErrorResponse(exception, HttpStatus.BAD_REQUEST);
     }
 }

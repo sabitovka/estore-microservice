@@ -15,6 +15,9 @@ async function apiRequest(url, options = {}) {
             if (response.status === 400 || response.status === 500) {
                 const errorData = await response.json();
                 errorMessage = errorData.message || errorMessage;
+                if (errorData.details) {
+                    errorMessage = `${errorMessage}:\n - ${errorData.details.join('; - \n')}.`
+                }
             }
             throw new Error(errorMessage);
         }

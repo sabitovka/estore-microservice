@@ -60,6 +60,9 @@ export async function initializePage() {
             for (const [field, value] of Object.entries(data)) {
                 const input = document.getElementById(field);
                 if (input) {
+                    if (input.nodeType === 'checkbox') {
+
+                    }
                     input.value = value;
                 }
             }
@@ -80,7 +83,11 @@ async function getSaveDataCallback(modelName, modelId, action, form) {
         const formData = {};
         for (const element of form.elements) {
             if (element.name) {
-                formData[element.name] = element.value;
+                if (element.type === 'checkbox') {
+                    formData[element.name] = element.value === 'on';
+                } else {
+                    formData[element.name] = element.value;
+                }
             }
         }
 
@@ -97,7 +104,7 @@ async function getSaveDataCallback(modelName, modelId, action, form) {
             window.location.href = `viewdata.html?model=${modelName}`;
         } catch (error) {
             console.error(error);
-            showAlert('Ошибка сохранения данных');
+            showAlert(error.message);
         }
     }
 }

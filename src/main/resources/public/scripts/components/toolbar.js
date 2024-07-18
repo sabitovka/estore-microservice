@@ -33,6 +33,7 @@ export function initializeToolbar() {
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="../pages/viewdata.html?model=Shop">Магазины</a>
+                            <a class="dropdown-item" href="../pages/viewdata.html?model=ElectroType">Типы электроники</a>
                             <a class="dropdown-item" href="../pages/viewdata.html?model=PurchaseType">Типы оплаты</a>
                             <a class="dropdown-item" href="../pages/viewdata.html?model=PositionType">Типы должностей</a>
                         </div>

@@ -15,7 +15,7 @@ export const extra = {
 }
 
 export const modelInfo = {
-    modelName: "Покупки",
+    modelName: 'Продажи',
     editButton: false,
     deleteButton: false,
 }

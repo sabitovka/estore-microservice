@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EStore microservice - Главная страница</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="toolbar"></div>
+
+    <div class="container mt-5">
+        <div class="text-center">
+            <h3 class="font-weight-bold">
+                Тестовое задание на вакансию Java-разработчика компании <br> ООО Информационные системы и сервисы.
+            </h3>
+            <h4>Выполнил Сабитов К.А.</h4>
+            <h5 class="mt-4">Воспользуйтесь тулбаром для навигации.</h5>
+            <div class="mt-5 card p-3">
+                <form method="post" id="importDataForm">
+                    <div class="form-group1">
+                        <label for="import-zip-file">Импортируйте данные из архива*</label>
+                        <br>
+                        <input type="file" name="zip-file" id="import-zip-file" required accept=".zip,.rar,.7zip">
+                        <br>
+                        <small class="text-danger">*Внимание, импорт сотрет все введенные ранее данные</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Загрузить</button>
+                </form>
+            </div>
+        </div>
+        <h4 class="mt-4">Статистика*</h4>
+        <div id="bestJuniorSoldSmartWatches"></div>
+        <div id="revenueByCash"></div>
+        <div>
+            <div id="dataGridContainerSales" class="mt-5"></div>
+            <div id="dataGridContainerRevenue" class="mt-5"></div>
+        </div>
+        <div class="mb-3"><small>*Статистика настроена на данные, которые будут получены из архива</small>
+        </div>
+
+    </div>
+    
+    <div id="alert-container" class="position-absolute fixed-top  p-3 mt-5" style="z-index: 100;"></div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
+</body>
+</html>

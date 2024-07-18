@@ -96,23 +96,21 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/{id}/electro-types")
-	@ResponseStatus(HttpStatus.OK)
 	@Operation(summary = "Добавить назначение сотрудника к типу электроники")
 	public ResponseEntity<Void> addElectroTypeToEmployee(
 			@PathVariable Long id,
 			@RequestBody SimpleIdDTO electroTypeIdDTO) {
 		log.info("Запрос на добавление типа электроники к пользователю с id = {}", id);
 		employeeService.addElectroTypeToEmployee(id, electroTypeIdDTO.getId());
-		return ResponseEntity.ok().build();
+		return ResponseEntity.noContent().build();
 	}
 
-	@DeleteMapping("/{id}/electro-types")
-	@ResponseStatus(HttpStatus.OK)
+	@DeleteMapping("/{id}/electro-types/{electroTypeId}")
 	@Operation(summary = "Удалить назначение типа электроники у сотрудника")
 	public ResponseEntity<Void> removeElectroTypeFromEmployee(
 			@PathVariable Long id,
-			@RequestBody SimpleIdDTO electroTypeIdDTO) {
-		employeeService.removeElectroTypeFromEmployee(id, electroTypeIdDTO.getId());
-		return ResponseEntity.ok().build();
+			@PathVariable Long electroTypeId) {
+		employeeService.removeElectroTypeFromEmployee(id, electroTypeId);
+		return ResponseEntity.noContent().build();
 	}
 }

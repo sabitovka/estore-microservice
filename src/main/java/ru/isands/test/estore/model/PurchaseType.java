@@ -14,7 +14,7 @@ public class PurchaseType {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "purchase_type_counter")
-    @TableGenerator(name = "purchase_type_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.model.PurchaseType", table = "counter", valueColumnName = "currentid", allocationSize = 2)
+    @TableGenerator(name = "purchase_type_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.model.PurchaseType", table = "counter", valueColumnName = "currentid", allocationSize = 1)
     @Column(name = "id", nullable = false)
     Long id;
 

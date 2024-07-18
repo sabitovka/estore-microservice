@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.isands.test.estore.dto.AmountDTO;
 import ru.isands.test.estore.dto.EmployeeCompactDTO;
@@ -49,17 +50,20 @@ public class StatisticController {
     }
 
     @GetMapping("/best-employee-position-type-sold")
-    @ResponseStatus(HttpStatus.OK)
     @Operation(
             summary = "Вывод лучшего сотрудника, продавшего больше всех определенного типа товаров",
             description = "Например, можно найти лучшего младшего продавца-консультанта, продавшего больше всех смарт-часов"
     )
-    public EmployeeCompactDTO findBestJuniorWhoSoldMostItems(
+    public ResponseEntity<EmployeeCompactDTO> findBestJuniorWhoSoldMostItems(
             @RequestParam @Parameter(description = "Id должности")
             Long positionTypeId,
             @RequestParam @Parameter(description = "Id типа предмета")
             Long itemId) {
-        return statisticService.getTopEmployeeByPositionTypeAndItemsSold(positionTypeId, itemId);
+        EmployeeCompactDTO bestEmployee =  statisticService.getTopEmployeeByPositionTypeAndItemsSold(positionTypeId, itemId);
+        if (bestEmployee == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(bestEmployee);
     }
 
     @GetMapping("/amount-of-funds-received-through")

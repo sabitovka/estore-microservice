@@ -29,6 +29,6 @@ public class ImportController {
     public ResponseEntity<Void> importFromZipWithCsv(@RequestPart(value = "file") MultipartFile zip) {
         databaseTruncationService.truncateAllTables();
         importService.importDataFromZipWithCsv(zip);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }

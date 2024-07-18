@@ -1,10 +1,8 @@
 package ru.isands.test.estore.model;
 
 import lombok.Data;
-import org.apache.commons.lang3.builder.HashCodeExclude;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Data
 @Entity
@@ -15,7 +13,7 @@ public class ElectroType {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "electro_type_generator")
-    @TableGenerator(name = "electro_type_generator", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.model.ElectroType", table = "counter", valueColumnName = "currentid", allocationSize = 2)
+    @TableGenerator(name = "electro_type_generator", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.model.ElectroType", table = "counter", valueColumnName = "currentid", allocationSize = 1)
     @Column(name = "id", nullable = false)
     Long id;
 

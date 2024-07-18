@@ -64,6 +64,9 @@ public class StatisticService {
 
     public EmployeeCompactDTO getTopEmployeeByPositionTypeAndItemsSold(Long positionTypeId, Long itemId) {
         List<Object[]> obj = statisticRepository.getTopEmployeeBySalesOfItemId(positionTypeId, itemId);
+        if (obj.size() == 0) {
+            return null;
+        }
         Object[] result = obj.get(0);
         EmployeeCompactDTO employeeCompactDTO = new EmployeeCompactDTO();
         employeeCompactDTO.setId((Long) result[0]);

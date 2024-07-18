@@ -17,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/position-types")
+@RequestMapping("/estore/api/position-types")
 @Tag(name = "PositionType", description = "Сервис для выполнения операций над типами должностей")
 public class PositionTypeController {
     private final PositionTypeService positionTypeService;

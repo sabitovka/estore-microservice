@@ -13,7 +13,7 @@ public class Shop {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "shop_counter")
-    @TableGenerator(name = "shop_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.model.Shop", table = "counter", valueColumnName = "currentid", allocationSize = 2)
+    @TableGenerator(name = "shop_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.model.Shop", table = "counter", valueColumnName = "currentid", allocationSize = 1)
     @Column(name = "id", nullable = false)
     Long id;
 

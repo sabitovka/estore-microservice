@@ -14,7 +14,7 @@ public class PositionType {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "position_counter")
-    @TableGenerator(name = "position_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.model.PositionType", table = "counter", valueColumnName = "currentid", allocationSize = 2)
+    @TableGenerator(name = "position_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.model.PositionType", table = "counter", valueColumnName = "currentid", allocationSize = 1)
     @Column(name = "id", nullable = false)
     Long id;
 

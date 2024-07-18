@@ -10,5 +10,4 @@ public class PurchaseCreateDTO {
     Long employeeId;
     Long shopId;
     Long purchaseTypeId;
-    Date purchaseDate;
 }

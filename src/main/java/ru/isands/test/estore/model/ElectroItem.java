@@ -16,7 +16,7 @@ public class ElectroItem {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "electro_item_counter")
-    @TableGenerator(name = "electro_item_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.models.ElectroItem", table = "counter", valueColumnName = "currentid", allocationSize = 2)
+    @TableGenerator(name = "electro_item_counter", pkColumnName = "name", pkColumnValue = "ru.isands.test.estore.models.ElectroItem", table = "counter", valueColumnName = "currentid", allocationSize = 1)
     @Column(name = "id_", unique = true, nullable = false)
     Long id;
 

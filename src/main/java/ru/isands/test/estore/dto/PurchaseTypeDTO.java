@@ -8,7 +8,6 @@ import javax.validation.constraints.Null;
 
 @Data
 public class PurchaseTypeDTO {
-    @Null
     Long id;
 
     @NotBlank(message = "Поле name не должно быть пустым")

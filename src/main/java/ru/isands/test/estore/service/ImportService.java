@@ -147,7 +147,7 @@ public class ImportService {
         employee.setBirthDate(new SimpleDateFormat("dd.MM.yy").parse(itemsInfo[4]));
         employee.setPositionType(positionTypeRepository.getReferenceById(Long.valueOf(itemsInfo[5])));
         employee.setShop(shopRepository.getReferenceById(Long.valueOf(itemsInfo[6])));
-        employee.setGender(Boolean.parseBoolean(itemsInfo[7]));
+        employee.setGender(itemsInfo[7].equals("1"));
         return employee;
     }
 

@@ -1,6 +1,7 @@
 package ru.isands.test.estore.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.isands.test.estore.repository.EntityManagerRepository;
 
@@ -26,7 +27,7 @@ public class DatabaseTruncationService {
         this.entityManagerRepository = entityManagerRepository;
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void truncateAllTables() {
         entityManagerRepository.truncateTable(TABLE_NAMES);
     }

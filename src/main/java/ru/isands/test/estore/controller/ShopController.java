@@ -101,7 +101,7 @@ public class ShopController {
     @Operation(summary = "Добавить список товаров в магазин", description = "Товары будут добавлены к существующим в этом магазине")
     public ResponseEntity<Void> addElectroItemsToShop(@PathVariable Long shopId, @RequestBody List<AddElectroItemDTO> electroItems) {
         shopService.addElectroItemsToShop(shopId, electroItems);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{shopId}/electro-items")
